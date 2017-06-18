@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # provided by the vendor
 # change as needed
 INSTALL_ID=1234
