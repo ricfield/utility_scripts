@@ -13,17 +13,31 @@ if [ -z $SFTP_SERVER ]
    echo "Usage: sync_with_update_server.sh <server hostname or IP address> <directory path on server>"
    echo "       <local installer cache directory>"
    echo ""
-   echo "A trailing front slash (/) must be used in this program
+   echo "A trailing front slash (/) must be used in this program"
    exit -1
 fi
 
+
+# Check input for errors
 if [ $(echo -n $SFTP_SERVER_DIR | tail -c 1) != "/" ]
    echo "Error: server hostname directory path missing a trailing slash."
    exit -2 
 
 elif [ $(echo -n $LOCAL_UPDATE_CACHE_DIR | tail -c 1) != "/" ]
    echo "Error: local installer cache directory path missing a trailing slash."
+   exit -3
+   
+# if all is good, run the synchronization process
 else
    rsync -avt --progress $SFTP_SERVER:$SFTP_SERVER_DIR $LOCAL_UPDATE_CACHE_DIR
 fi
+
+# check if synchronization process ran sucessfully
+if [ $? -eq 0 ] 
+   echo "Update synchronization process completed normally"
+else
+   echo "Synchronization process completed with errors"
+fi
+
+
 
