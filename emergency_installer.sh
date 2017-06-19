@@ -2,8 +2,6 @@
 
 # provided by the vendor
 INSTALL_ID=$1
-
-# can be 'live' or 'test'
 SYSTEM=$2
 
 PROGRAM_DIR=/usr/local/$SYSTEM
