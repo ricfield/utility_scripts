@@ -20,7 +20,7 @@ then
    echo "An installation ID and a system to which to install is required."
    echo "Usage: emergency_installer.sh <installation_id> <system>"
    exit -1
-
+fi
 
 # determine which files will be over-written and move them out of the way
 
@@ -50,7 +50,7 @@ do
    if [ $? -ne 0 ]
    then
       echo "Unable to copy $installer_dir_program. Check if there is a file lock on the program."
-      exit -2
+      exit -3
    fi
 done
 
@@ -59,5 +59,5 @@ then
    echo "Install operation completed for $INSTALL_ID"
 else
    echo "Install operation completed with errors"
-   exit -3
+   exit -4
 fi
