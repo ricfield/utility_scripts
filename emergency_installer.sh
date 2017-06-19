@@ -1,11 +1,10 @@
 #!/bin/bash
 
 # provided by the vendor
-# change as needed
-INSTALL_ID=1234
+INSTALL_ID=$1
 
 # can be 'live' or 'test'
-SYSTEM=live 
+SYSTEM=$2
 
 PROGRAM_DIR=/usr/local/$SYSTEM
 
@@ -14,6 +13,14 @@ PROGRAM_DIR_FILE_LIST=$(find -type f $PROGRAM_DIR)
 INSTALLER_STAGE_LOCATION=/usr/local/installer/stage/intstaller_$INSTALL_ID/
 INSTALLER_STAGE_FILE_LIST=$(find -type f $INSTALLER_STAGE_LOCATION)
 UNINSTALL_BACKUP_LOCATION=/usr/local/installer/uninstall_$INSTALL_ID/
+
+# check command line inputs
+if [ -z $INSTALL_ID || -z $SYSTEM ]
+then
+   echo "An installation ID and a system to which to install is required."
+   echo "Usage: emergency_installer.sh <installation_id> <system>"
+   exit -1
+
 
 # determine which files will be over-written and move them out of the way
 
@@ -29,7 +36,7 @@ do
          if [ $? -ne 0 ]
          then
             echo "Unable to move $program.  Check if the program is open or has a file lock on it."
-            exit -1
+            exit -2
          fi
       fi
    done
@@ -43,7 +50,7 @@ do
    if [ $? -ne 0 ]
    then
       echo "Unable to copy $installer_dir_program. Check if there is a file lock on the program."
-      exit -1 
+      exit -2
    fi
 done
 
@@ -52,7 +59,5 @@ then
    echo "Install operation completed for $INSTALL_ID"
 else
    echo "Install operation completed with errors"
+   exit -3
 fi
-
-            
-
