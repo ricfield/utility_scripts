@@ -22,10 +22,12 @@ do
    for $installer_dir_program in INSTALLER_STAGE_FILE_LIST
    do 
       if [ $program == $installer_dir_program ]
+      then
          mv $program $UNINSTALL_BACKUP_LOCATION
         
          # check to see if the file was moved successfully by checking the exit code for mv
          if [ $? -ne 0 ]
+         then
             echo "Unable to move $program.  Check if the program is open or has a file lock on it."
             exit -1
          fi
@@ -39,12 +41,18 @@ for $installer_dir_program in INSTALLER_STAGE_FILE_LIST
 do
    cp $installer_dir_program $PROGRAM_DIR
    if [ $? -ne 0 ]
+   then
       echo "Unable to copy $installer_dir_program. Check if there is a file lock on the program."
       exit -1 
    fi
 done
 
-echo "Install operation completed for $INSTALL_ID"
+if [ $? -eq 0 ]
+then 
+   echo "Install operation completed for $INSTALL_ID"
+else
+   echo "Install operation completed with errors"
+fi
 
             
 
