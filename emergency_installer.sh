@@ -13,7 +13,7 @@ INSTALLER_STAGE_FILE_LIST=$(find -type f $INSTALLER_STAGE_LOCATION)
 UNINSTALL_BACKUP_LOCATION=/usr/local/installer/uninstall_$INSTALL_ID/
 
 # check command line inputs
-if [ -z $INSTALL_ID ] || [ -z $SYSTEM ]
+if [ -z $INSTALL_ID ] || [ -z $SYSTEM ];
 then
    echo "An installation ID and a system to which to install is required."
    echo "Usage: emergency_installer.sh <installation_id> <system>"
@@ -26,7 +26,7 @@ for $program in PROGRAM_DIR_FILE_LIST
 do
    for $installer_dir_program in INSTALLER_STAGE_FILE_LIST
    do 
-      if [ $program == $installer_dir_program ]
+      if [ $program == $installer_dir_program ];
       then
          mv $program $UNINSTALL_BACKUP_LOCATION
         
@@ -45,14 +45,14 @@ done
 for $installer_dir_program in INSTALLER_STAGE_FILE_LIST
 do
    cp $installer_dir_program $PROGRAM_DIR
-   if [ $? -ne 0 ]
+   if [ $? -ne 0 ];
    then
       echo "Unable to copy $installer_dir_program. Check if there is a file lock on the program."
       exit -3
    fi
 done
 
-if [ $? -eq 0 ]
+if [ $? -eq 0 ];
 then 
    echo "Install operation completed for $INSTALL_ID"
 else
