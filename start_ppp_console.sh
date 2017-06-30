@@ -24,8 +24,6 @@ REMOTE_IP_ADDRESS=172.16.0.241
 
 # Check for input errors
 
-
-
 if [ $MS_DNS != "Y" ] && [ $MS_DNS != "N" ];
 then
    echo "A Microsoft DNS option is required.  Aborting..."
