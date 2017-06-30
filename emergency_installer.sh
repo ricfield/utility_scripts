@@ -13,7 +13,7 @@ INSTALLER_STAGE_FILE_LIST=$(find -type f $INSTALLER_STAGE_LOCATION)
 UNINSTALL_BACKUP_LOCATION=/usr/local/installer/uninstall_$INSTALL_ID/
 
 # check command line inputs
-if [ -z $INSTALL_ID || -z $SYSTEM ]
+if [ -z $INSTALL_ID ] || [ -z $SYSTEM ]
 then
    echo "An installation ID and a system to which to install is required."
    echo "Usage: emergency_installer.sh <installation_id> <system>"
