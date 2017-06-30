@@ -9,7 +9,7 @@ LOCAL_UPDATE_CACHE_DIR=$3
 
 
 # check for null command line parameters
-if [ -z $SFTP_SERVER || -z $SFTP_SERVER_DIR || -z $LOCAL_UPDATE_CACHE_DIR ]
+if [ -z $SFTP_SERVER ] || [ -z $SFTP_SERVER_DIR ] || [ -z $LOCAL_UPDATE_CACHE_DIR ]
 then
    echo "Usage: sync_with_update_server.sh <server hostname or IP address> <directory path on server>"
    echo "       <local installer cache directory>"
