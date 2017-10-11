@@ -1,8 +1,15 @@
-import urllib.request, json, csv, sys
+import urllib.request, json
 
-nppes_url = urllib.request.urlopen("https://npiregistry.cms.hhs.gov/api/?number=&enumeration_type=&taxonomy_description=&last_name=SMITH&firstname=&state=MD&postal_code=")
+postal_code = input("Enter Postal Code: ")
+last_name = input("Enter Last Name: ")
+
+nppes_url = urllib.request.urlopen("https://npiregistry.cms.hhs.gov/api/?limit=200&number=&enumeration_type=1&taxonomy_description=&last_name=" + last_name + "&firstname=&postal_code=" + postal_code)
 
 pv_information_json = json.loads(nppes_url.read())
 
+print("\n\nResults:\n")
+      
 for pv in pv_information_json['results']:
-   print(pv['basic']['name'],pv['number'])
+   print("\nDoctor Name: " + pv['basic']['first_name'],pv['basic']['last_name'] + "\nNPI Number: " + str(pv['number']))
+
+print("\n")
